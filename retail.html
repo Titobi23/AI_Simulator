@@ -22,9 +22,17 @@
         <h2 class="text-center mb-4">The Evolution of Retail/Services in the Industrial Age</h2>
 
         <!-- Technology Ages Simulation -->
-        <div class="text-center mb-5">
+        <div class="text-center mb-4">
             <h4 id="stageTitle">Stage 1: Pre-Industrial Age</h4>
             <p id="description">Retail was based on localized markets and face-to-face transactions. Goods were produced by local artisans and merchants.</p>
+        </div>
+
+        <!-- Image Display -->
+        <div class="text-center mb-4">
+            <img id="stageImage" src="Image/Retail1.png" alt="Stage Image" class="img-fluid" style="max-width: 300px; height: auto;">
+            <div class="mt-3">
+                <input type="range" id="imageSize" min="100" max="600" value="300" oninput="resizeImage(this.value)">
+            </div>
         </div>
 
         <!-- Buttons for decision making -->
@@ -57,22 +65,22 @@
             if (choice === 'adapt') {
                 switch (currentStage) {
                     case 1: 
-                        updateStage("Stage 2: First Industrial Revolution", "Mass production leads to larger retail outlets and the rise of department stores. Standardized products are now available.", 2);
+                        updateStage("Stage 2: First Industrial Revolution", "Mass production leads to larger retail outlets and the rise of department stores. Standardized products are now available.", "Image/Retail2.png", 2);
                         break;
                     case 2:
-                        updateStage("Stage 3: Second Industrial Revolution", "Railroads and electricity enable nationwide distribution. Chain stores and mail-order catalogs emerge.", 3);
+                        updateStage("Stage 3: Second Industrial Revolution", "Railroads and electricity enable nationwide distribution. Chain stores and mail-order catalogs emerge.", "Image/Retail3.png", 3);
                         break;
                     case 3:
-                        updateStage("Stage 4: Post-WWII Growth", "Shopping malls and supermarkets flourish. Big-box retailers like Walmart dominate the retail space.", 4);
+                        updateStage("Stage 4: Post-WWII Growth", "Shopping malls and supermarkets flourish. Big-box retailers like Walmart dominate the retail space.", "Image/Retail4.png", 4);
                         break;
                     case 4:
-                        updateStage("Stage 5: Information Age", "The rise of e-commerce and digital marketing. Online retail platforms like Amazon revolutionize shopping.", 5);
+                        updateStage("Stage 5: Information Age", "The rise of e-commerce and digital marketing. Online retail platforms like Amazon revolutionize shopping.", "Image/Retail5.png", 5);
                         break;
                     case 5:
-                        updateStage("Stage 6: AI and Automation Era", "AI-powered recommendations, automated warehouses, and AR/VR change how we shop. Drones and autonomous delivery systems begin to take shape.", 6);
+                        updateStage("Stage 6: AI and Automation Era", "AI-powered recommendations, automated warehouses, and AR/VR change how we shop. Drones and autonomous delivery systems begin to take shape.", "Image/Retail6.png", 6);
                         break;
                     case 6:
-                        updateStage("Stage 7: Future Retail", "Retail is fully integrated with AI, robotics, and personalized shopping experiences. Consumers shop via virtual stores and automated systems.", 7);
+                        updateStage("Stage 7: Future Retail", "Retail is fully integrated with AI, robotics, and personalized shopping experiences. Consumers shop via virtual stores and automated systems.", "Image/Retail7.png", 7);
                         break;
                     case 7:
                         document.getElementById("outcomeDescription").innerText = "You are at the cutting edge of retail, leading the industry with AI-driven solutions and seamless customer experiences.";
@@ -86,13 +94,18 @@
         }
 
         // Function to update the current stage and outcome description
-        function updateStage(title, description, nextStage) {
+        function updateStage(title, description, imageSrc, nextStage) {
             document.getElementById("stageTitle").innerText = title;
             document.getElementById("description").innerText = description;
+            document.getElementById("stageImage").src = imageSrc;
             document.getElementById("outcomeDescription").innerText = "Keep adapting to stay ahead!";
             currentStage = nextStage;
         }
 
+        // Function to resize the image dynamically
+        function resizeImage(size) {
+            document.getElementById("stageImage").style.maxWidth = size + "px";
+        }
     </script>
 </body>
 </html>

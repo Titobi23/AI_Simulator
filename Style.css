@@ -226,3 +226,15 @@ h4 {
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+    #imageSize {
+        display: none; /* Hides the size adjustment slider */
+    }
+    #imageSize + label {
+        display: none; /* Hides the label associated with the slider */
+    }
+    #adjustText {
+        display: none; /* Hides the text explaining the size adjustment */
+    }
+}
