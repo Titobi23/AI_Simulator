@@ -1,17 +1,29 @@
-/* Body background color */
+/* General Body Background */
+.bg-light {
+    background-color: #f8f9fa;
+}
+
 .bg-purple {
     background-color: rgb(65, 34, 52);
 }
 
-a {
-    text-decoration: none;
+/* Navbar Styling */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-a:hover {
-    text-decoration: underline;
+.navbar-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
 }
 
-/* Main container styling */
+/* Main Container */
 #mother {
     padding: 30px;
     background-color: rgb(163, 163, 128);
@@ -20,14 +32,7 @@ a:hover {
     margin-top: 70px; /* Offsets the navbar */
 }
 
-/* Navbar styling */
-.navbar-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-}
-
-/* Card styling */
+/* Card Styling */
 .card {
     height: 100%;
     display: flex;
@@ -48,7 +53,7 @@ a:hover {
     padding: 1rem;
 }
 
-/* Footer styling */
+/* Footer Styling */
 footer {
     text-align: center;
     background-color: #f8f9fa;
@@ -57,29 +62,6 @@ footer {
     margin-top: 20px;
 }
 
-
-/* Manufacturing */
-/* Body background color */
-.bg-light {
-    background-color: #f8f9fa;
-}
-
-/* Navbar styling */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-}
-
 /* Career Outcome Styling */
 #careerOutcome {
     background-color: #e9ecef;
@@ -100,141 +82,10 @@ h4 {
     font-weight: bold;
 }
 
-
-/* Healthcare */
-/* Body background color */
-.bg-light {
-    background-color: #f8f9fa;
-}
-
-/* Navbar styling */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-}
-
-/* Career Outcome Styling */
-#careerOutcome {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Button Styling */
-button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-}
-
-/* Text Styling */
-h4 {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-/* Finance */
-/* Body background color */
-.bg-light {
-    background-color: #f8f9fa;
-}
-
-/* Navbar styling */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-}
-
-/* Career Outcome Styling */
-#careerOutcome {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Button Styling */
-button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-}
-
-/* Text Styling */
-h4 {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-/* Retail/Services */
-/* Body background color */
-.bg-light {
-    background-color: #f8f9fa;
-}
-
-/* Navbar styling */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-}
-
-/* Career Outcome Styling */
-#careerOutcome {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Button Styling */
-button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-}
-
-/* Text Styling */
-h4 {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
+/* Media Query for Mobile Devices */
 @media (max-width: 1024px) {
-    #imageSize {
-        display: none; /* Hides the size adjustment slider */
-    }
-    #imageSize + label {
-        display: none; /* Hides the label associated with the slider */
-    }
-    #adjustText {
-        display: none; /* Hides the text explaining the size adjustment */
+    /* Hides the size adjustment slider and its label on small screens */
+    #imageSize, #imageSize + label, #adjustText {
+        display: none;
     }
 }
