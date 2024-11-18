@@ -89,3 +89,23 @@ h4 {
         display: none;
     }
 }
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+.stage-image {
+    max-width: 100%;
+    height: auto;
+}

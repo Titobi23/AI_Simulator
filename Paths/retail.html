@@ -10,47 +10,82 @@
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-text mx-auto">Retail/Services - AI Simulator</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container">
+            <span class="navbar-text mx-auto h5">Retail/Services - AI Simulator</span>
         </div>
     </nav>
-    <hr>
 
     <!-- Main Content -->
     <div class="container py-5">
         <h2 class="text-center mb-4">The Evolution of Retail/Services in the Industrial Age</h2>
 
+        <hr>
         <!-- Technology Ages Simulation -->
         <div class="text-center mb-4">
             <h4 id="stageTitle">Stage 1: Pre-Industrial Age</h4>
-            <p id="description">Retail was based on localized markets and face-to-face transactions. Goods were produced by local artisans and merchants.</p>
+            <p id="description" class="lead">Retail was based on localized markets and face-to-face transactions. Goods were produced by local artisans and merchants.</p>
         </div>
 
         <!-- Image Display -->
         <div class="text-center mb-4">
-            <img id="stageImage" src="Retail1.png" alt="Stage Image" class="img-fluid" style="max-width: 300px; height: auto;">
+            <img id="stageImage" src="Retail1.png" alt="Stage Image" class="img-fluid" class="img-fluid stage-image">
             <div class="mt-3">
                 <input type="range" id="imageSize" min="100" max="600" value="300" oninput="resizeImage(this.value)">
             </div>
         </div>
 
         <!-- Buttons for decision making -->
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-success mx-2" onclick="adapt('adapt')">Adapt to the change</button>
-            <button class="btn btn-danger mx-2" onclick="adapt('ignore')">Ignore the change</button>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button class="btn btn-success btn-lg mx-2" onclick="adapt('adapt')">Adapt to the change</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger  btn-lg mx-2" onclick="adapt('ignore')">Ignore the change</button>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Career Outcome -->
+        <div id="careerOutcome" class="text-center">
+            <h4>Career Outcome</h4>
+            <p id="outcomeDescription" class="lead">Choose to adapt or ignore the technological changes to see what happens.</p>
         </div>
 
         <hr>
 
-        <!-- Career Outcome -->
-        <div id="careerOutcome" class="mt-5 text-center">
-            <h4>Career Outcome</h4>
-            <p id="outcomeDescription">Choose to adapt or ignore the technological changes to see what happens.</p>
+        <!-- AI Adaptation Impact Table -->
+        <div class="text-center mb-4">
+            <h2>Retail: AI Adaptation Impact</h2>
+            <label for="retail-ai-level" class="form-label">Choose AI Adaptation Level:</label>
+            <select id="retail-ai-level" class="form-select w-auto mx-auto" onchange="updateRetailTable()">
+                <option value="-">-</option>
+                <option value="low">Low</option>
+                <option value="mid">Mid</option>
+                <option value="high">High</option>
+            </select>
         </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" id="retail-table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Job Security</th>
+                        <th>Impact on People</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will populate here -->
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-    <footer class="text-center py-3">
+    <footer class="text-center py-3 border-top">
         <p>&copy; 2024 - Titobiloluwa Olatunji. All rights reserved</p>
     </footer>
 
@@ -104,6 +139,46 @@
         // Function to resize the image dynamically
         function resizeImage(size) {
             document.getElementById("stageImage").style.maxWidth = size + "px";
+        }
+
+        const retailData = {
+            low: {
+                jobSecurity: "Stable; most roles remain manual.",
+                impactOnPeople: "Limited use of AI; basic customer service skills suffice.",
+                pros: "Preservation of traditional retail jobs; personal customer interaction.",
+                cons: "Slower service; inefficiencies in inventory and demand management."
+            },
+            mid: {
+                jobSecurity: "Reduction in repetitive roles like cashiers.",
+                impactOnPeople: "Employees need skills to operate AI-assisted tools for inventory and customer support.",
+                pros: "Improved customer experience with AI-driven insights and moderate automation.",
+                cons: "Increased pressure on employees to manage both manual and digital tasks."
+            },
+            high: {
+                jobSecurity: "Widespread displacement of traditional retail roles.",
+                impactOnPeople: "Advanced skills in AI systems, robotics, and e-commerce essential.",
+                pros: "Enhanced operational efficiency; highly personalized shopping experiences.",
+                cons: "Massive workforce reduction; steep learning curve for reskilling."
+            }
+        };
+
+        function updateRetailTable() {
+            const level = document.getElementById("retail-ai-level").value;
+            const tbody = document.getElementById("retail-table").querySelector("tbody");
+
+            tbody.innerHTML = "";
+            if (level !== "-") {
+                const selectedData = retailData[level];
+                const row = `
+                    <tr>
+                        <td>${selectedData.jobSecurity}</td>
+                        <td>${selectedData.impactOnPeople}</td>
+                        <td>${selectedData.pros}</td>
+                        <td>${selectedData.cons}</td>
+                    </tr>
+                `;
+                tbody.innerHTML = row;
+            }
         }
     </script>
 </body>

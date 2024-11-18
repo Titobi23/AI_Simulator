@@ -10,61 +10,98 @@
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-text mx-auto">Manufacturing - AI Simulator</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <div class="container">
+            <span class="navbar-text mx-auto h5">Manufacturing - AI Simulator</span>
         </div>
     </nav>
-    <hr>
 
-    <!-- Main Content -->
     <div class="container py-5">
         <h2 class="text-center mb-4">The Impact of Technology on the Manufacturing Sector</h2>
+        <hr>
 
         <!-- Technology Ages Simulation -->
-        <div class="text-center mb-5">
+        <div class="text-center mb-4">
             <h4 id="stageTitle">Stage 1: Pre-Industrial Age</h4>
-            <p id="description">Manufacturing is done by hand with limited tools. Workers need to adapt by learning new skills like craftsmanship.</p>
+            <p id="description" class="lead">
+                Manufacturing is done by hand with limited tools. Workers need to adapt by learning new skills like craftsmanship.
+            </p>
         </div>
 
-        <!-- Image Display for Each Stage -->
+        <!-- Image Display and Controls -->
         <div class="text-center mb-4">
-            <img id="stageImage" src="Manu1.png" alt="Stage Image" class="img-fluid" style="max-width: 300px; height: auto;">
+            <img id="stageImage" src="Manu1.png" alt="Stage Image" class="img-fluid stage-image">
             <div class="mt-3">
                 <input type="range" id="imageSize" min="100" max="600" value="300" oninput="resizeImage(this.value)">
             </div>
         </div>
 
-        <!-- Buttons for decision making -->
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-success mx-2" onclick="adapt('adapt')">Adapt to the change</button>
-            <button class="btn btn-danger mx-2" onclick="adapt('ignore')">Ignore the change</button>
+        <!-- Decision Buttons -->
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button class="btn btn-success btn-lg mx-2" onclick="adapt('adapt')">Adapt to the change</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger btn-lg mx-2" onclick="adapt('ignore')">Ignore the change</button>
+            </div>
         </div>
 
-        <hr>
+        <hr class="my-5">
 
         <!-- Career Outcome -->
-        <div id="careerOutcome" class="mt-5 text-center">
+        <div id="careerOutcome" class="text-center">
             <h4>Career Outcome</h4>
-            <p id="outcomeDescription">Choose to adapt or ignore the technological changes to see what happens.</p>
+            <p id="outcomeDescription" class="lead">
+                Choose to adapt or ignore the technological changes to see what happens.
+            </p>
+        </div>
+
+        <hr class="my-5">
+
+        <!-- AI Adaptation Impact Table -->
+        <div class="text-center mb-4">
+            <h2>Manufacturing: AI Adaptation Impact</h2>
+            <label for="manufacturing-ai-level" class="form-label">Choose AI Adaptation Level:</label>
+            <select id="manufacturing-ai-level" class="form-select w-auto mx-auto" onchange="updateManufacturingTable()">
+                <option value="-">-</option>
+                <option value="low">Low</option>
+                <option value="mid">Mid</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" id="manufacturing-table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Job Security</th>
+                        <th>Impact on People</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will populate here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <footer class="text-center py-3">
+    <footer class="text-center py-3 border-top">
         <p>&copy; 2024 - Titobiloluwa Olatunji. All rights reserved.</p>
     </footer>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
         // Manufacturing simulation
         let currentStage = 1; // Starting at Stage 1
 
-        // Function to handle the "Adapt" or "Ignore" decision
+
+
         function adapt(choice) {
             if (choice === 'adapt') {
                 switch (currentStage) {
-                    case 1: 
+                    case 1:
                         updateStage("Stage 2: Industrial Revolution", 
                                     "You learned to operate machines, leading to better wages and opportunities. Great start!", 
                                     "manu2.png", 
@@ -105,7 +142,6 @@
             }
         }
 
-        // Function to update the current stage, description, image, and outcome description
         function updateStage(title, description, imageSrc, nextStage) {
             document.getElementById("stageTitle").innerText = title;
             document.getElementById("description").innerText = description;
@@ -114,9 +150,48 @@
             currentStage = nextStage;
         }
 
-        // Function to resize the image dynamically
         function resizeImage(size) {
             document.getElementById("stageImage").style.maxWidth = size + "px";
+        }
+
+        const manufacturingData = {
+            low: {
+                jobSecurity: "Stable; minimal automation.",
+                impactOnPeople: "Few skills required; low adoption of AI tools.",
+                pros: "Minimal disruption; job retention for manual labor.",
+                cons: "Slow productivity growth; lagging innovation."
+            },
+            mid: {
+                jobSecurity: "Slight decline in repetitive jobs.",
+                impactOnPeople: "Workers need basic technical upskilling.",
+                pros: "Improved efficiency and moderate adoption of AI.",
+                cons: "Higher competition for remaining manual roles."
+            },
+            high: {
+                jobSecurity: "Major decline in manual jobs.",
+                impactOnPeople: "High-level AI and robotics skills essential.",
+                pros: "High productivity and global competitiveness.",
+                cons: "Massive job displacement; significant upskilling required."
+            }
+        };
+
+        function updateManufacturingTable() {
+            const level = document.getElementById("manufacturing-ai-level").value;
+            const tbody = document.getElementById("manufacturing-table").querySelector("tbody");
+
+            tbody.innerHTML = "";
+            if (level !== "-") {
+                const selectedData = manufacturingData[level];
+                const row = `
+                    <tr>
+                        <td>${selectedData.jobSecurity}</td>
+                        <td>${selectedData.impactOnPeople}</td>
+                        <td>${selectedData.pros}</td>
+                        <td>${selectedData.cons}</td>
+                    </tr>
+                `;
+                tbody.innerHTML = row;
+            }
         }
     </script>
 </body>

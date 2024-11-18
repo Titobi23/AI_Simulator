@@ -10,35 +10,37 @@
 <body class="bg-light">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
-            <span class="navbar-text mx-auto">Finance - AI Simulator</span>
+            <span class="navbar-text mx-auto h5">Finance - AI Simulator</span>
         </div>
     </nav>
-    <hr>
 
-    <!-- Main Content -->
     <div class="container py-5">
         <h2 class="text-center mb-4">The Evolution of Finance in the Industrial Age</h2>
 
         <!-- Technology Ages Simulation -->
-        <div class="text-center mb-5">
+        <div class="text-center mb-4">
             <h4 id="stageTitle">Stage 1: Pre-Industrial Age</h4>
-            <p id="description">Finance was largely informal, with trade based on barter and coinage. Limited use of credit and investment systems.</p>
+            <p id="description" class="lead">Finance was largely informal, with trade based on barter and coinage. Limited use of credit and investment systems.</p>
         </div>
 
         <!-- Image Display for Each Stage -->
         <div class="text-center mb-4">
-            <img id="stageImage" src="Fin1.png" alt="Stage Image" class="img-fluid" style="max-width: 300px; height: auto;">
+            <img id="stageImage" src="Fin1.png" alt="Stage Image" class="img-fluid stage-image">
             <div class="mt-3">
                 <input type="range" id="imageSize" min="100" max="600" value="300" oninput="resizeImage(this.value)">
             </div>
         </div>
 
         <!-- Buttons for decision making -->
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-success mx-2" onclick="adapt('adapt')">Adapt to the change</button>
-            <button class="btn btn-danger mx-2" onclick="adapt('ignore')">Ignore the change</button>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button class="btn btn-success mx-2" onclick="adapt('adapt')">Adapt to the change</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger mx-2" onclick="adapt('ignore')">Ignore the change</button>
+            </div>
         </div>
 
         <hr>
@@ -46,8 +48,39 @@
         <!-- Career Outcome -->
         <div id="careerOutcome" class="mt-5 text-center">
             <h4>Career Outcome</h4>
-            <p id="outcomeDescription">Choose to adapt or ignore the technological changes to see what happens.</p>
+            <p id="outcomeDescription" class="lead">Choose to adapt or ignore the technological changes to see what happens.</p>
         </div>
+
+        <hr>
+
+        <!-- AI Adaptation Impact Table -->
+        <div class="text-center mb-4">
+            <h2>Finance: AI Adaptation Impact</h2>
+            <label for="finance-ai-level" class="form-label">Choose AI Adaptation Level:</label>
+            <select id="finance-ai-level" class="form-select w-auto mx-auto" onchange="updateFinanceTable()">
+                <option value="-">-</option>
+                <option value="low">Low</option>
+                <option value="mid">Mid</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" id="finance-table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Job Security</th>
+                        <th>Impact on People</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will populate here -->
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
     <footer class="text-center py-3">
@@ -115,6 +148,47 @@
                 }
             } else if (choice === 'ignore') {
                 document.getElementById("outcomeDescription").innerText = "Unfortunately, you failed to adapt. Your career in finance is limited to outdated practices.";
+            }
+        }
+
+        const financeData = {
+            low: {
+                jobSecurity: "Stable; minimal automation in routine processes.",
+                impactOnPeople: "Basic financial knowledge sufficient; limited AI tool adoption.",
+                pros: "Minimal disruption to existing workflows; steady employment for traditional roles.",
+                cons: "Slower transaction speeds; missed opportunities in data-driven decision-making."
+            },
+            mid: {
+                jobSecurity: "Moderate decline in roles focused on repetitive tasks (e.g., data entry).",
+                impactOnPeople: "Workers require skills in using AI tools for fraud detection, forecasting, and analysis.",
+                pros: "Increased efficiency and accuracy in routine financial operations.",
+                cons: "Higher competition for roles requiring technical and analytical expertise."
+            },
+            high: {
+                jobSecurity: "Significant reduction in traditional finance roles due to AI-driven automation.",
+                impactOnPeople: "Advanced AI and data science skills essential for decision-making and innovation.",
+                pros: "Unparalleled precision in financial forecasting, fraud detection, and personalized services.",
+                cons: "Massive displacement of conventional roles; reskilling imperative for relevance."
+            }
+
+        };
+
+        function updateFinanceTable() {
+            const level = document.getElementById("finance-ai-level").value;
+            const tbody = document.getElementById("finance-table").querySelector("tbody");
+
+            tbody.innerHTML = "";
+            if (level !== "-") {
+                const selectedData = financeData[level];
+                const row = `
+                    <tr>
+                        <td>${selectedData.jobSecurity}</td>
+                        <td>${selectedData.impactOnPeople}</td>
+                        <td>${selectedData.pros}</td>
+                        <td>${selectedData.cons}</td>
+                    </tr>
+                `;
+                tbody.innerHTML = row;
             }
         }
     </script>
